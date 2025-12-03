@@ -9,7 +9,7 @@ import org.springframework.stereotype.Repository;
 @Repository
 public class CarDaoImp implements CarDao {
 
-    String findHql =
+    private String findHql =
             "SELECT car.user FROM Car car " +
                     "WHERE car.model = :model AND car.series = :series";
 

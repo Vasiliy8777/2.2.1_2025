@@ -17,8 +17,11 @@ public class CarServiceImp implements CarService {
             "SELECT car.user FROM Car car " +
                     "WHERE car.model = :model AND car.series = :series";
 
-    @Autowired
-    private CarDao carDao;
+    private final CarDao carDao;
+
+    public CarServiceImp(CarDao carDao) {
+        this.carDao = carDao;
+    }
 
     @Transactional
     @Override
@@ -26,7 +29,8 @@ public class CarServiceImp implements CarService {
         carDao.add(car);
     }
 
-    @Transactional
+    @Transactional(readOnly = true)
+    @Override
     public User findUser(String model, int series) {
         return carDao.findUser(model, series);
     }
