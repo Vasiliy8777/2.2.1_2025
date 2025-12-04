@@ -9,12 +9,15 @@ import org.springframework.stereotype.Repository;
 @Repository
 public class CarDaoImp implements CarDao {
 
-    private String findHql =
+    private final String findHql =
             "SELECT car.user FROM Car car " +
                     "WHERE car.model = :model AND car.series = :series";
 
-    @Autowired
-    private SessionFactory sessionFactory;
+    private final SessionFactory sessionFactory;
+
+    public CarDaoImp(SessionFactory sessionFactory) {
+        this.sessionFactory = sessionFactory;
+    }
 
     @Override
     public void add(Car car) {
